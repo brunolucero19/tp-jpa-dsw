@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "factura")
@@ -19,4 +21,14 @@ public class Factura implements Serializable {
 
     private String fecha;
     private int numero;
+    private int total;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "fk_cliente")
+    private Cliente cliente;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) //Ya que es composición
+    @JoinColumn(name = "fk_factura")
+    @Builder.Default
+    private Set<DetalleFactura> detalles = new HashSet<>();
 }

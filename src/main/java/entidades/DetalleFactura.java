@@ -21,4 +21,8 @@ public class DetalleFactura implements Serializable {
     private int cantidad;
     private int subtotal;
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "fk_articulo")
+    private Articulo articulo;
+
 }

@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Builder
 public class Domicilio implements Serializable {
     @Id
@@ -19,4 +20,8 @@ public class Domicilio implements Serializable {
 
     private String nombreCalle;
     private int numero;
+
+    //Si quisiera tener una relación bidireccional
+//    @OneToOne(mappedBy = "domicilio")
+//    private Cliente cliente;
 }

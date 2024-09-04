@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name="cliente")
@@ -11,6 +13,7 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Builder
 
 public class Cliente implements Serializable {
@@ -21,10 +24,17 @@ public class Cliente implements Serializable {
 
     @Column(name = "Nombre")
     private String nombre;
+
     private String apellido;
 
     @Column(unique = true)
     private int dni;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_domicilio")
+    private Domicilio domicilio;
 
+//    @OneToMany(mappedBy = "cliente")
+//    @Builder.Default
+//    private Set<Factura> facturas = new HashSet<>();
 }
